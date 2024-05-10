@@ -4,7 +4,7 @@ import init from '../helpers/init'
 
 module.exports = {
   before: function (browser: NightwatchBrowser, done: VoidFunction) {
-    init(browser, done, 'http://127.0.0.1:8080', false)
+    init(browser, done, 'http://127.0.0.1:3000', false)
   },
 
   'Loads Icon\'s Panel': function (browser: NightwatchBrowser) {

@@ -23,7 +23,7 @@ const localPluginData = {
 module.exports = {
   '@disabled': true,
   before: function (browser: NightwatchBrowser, done: VoidFunction) {
-    init(browser, done, 'http://127.0.0.1:8080', false)
+    init(browser, done, 'http://127.0.0.1:3000', false)
   },
 
   'Should Load Plugin Manager #group1': function (browser: NightwatchBrowser) {

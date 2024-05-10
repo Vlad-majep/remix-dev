@@ -5,7 +5,7 @@ import init from '../helpers/init'
 module.exports = {
   '@disabled': true,
   before: function (browser: NightwatchBrowser, done: VoidFunction) {
-    init(browser, done, 'http://127.0.0.1:8080?plugins=solidity,udapp', false)
+    init(browser, done, 'http://127.0.0.1:3000?plugins=solidity,udapp', false)
   },
   'Should execution a simple console command #group1': function (browser: NightwatchBrowser) {
     browser

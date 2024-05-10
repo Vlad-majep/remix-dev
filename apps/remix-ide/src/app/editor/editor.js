@@ -450,74 +450,7 @@ class Editor extends Plugin {
     this.emit('revealLine', line + 1, 0)
   }
 
-  /**
-   * Clears all the decorations for the given @arg filePath and @arg plugin, if none is given, the current session is used.
-   * An annotation has the following shape:
-      column: -1
-      row: -1
-      text: "browser/Untitled1.sol: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.↵"
-      type: "warning"
-   * @param {String} filePath
-   * @param {String} plugin
-   * @param {String} typeOfDecoration
-   */
-  clearDecorationsByPlugin (filePath, plugin, typeOfDecoration) {
-    if (filePath && !this.sessions[filePath]) throw new Error('file not found' + filePath)
-    const path = filePath || this.currentFile
 
-    const { currentDecorations, registeredDecorations } = this.api.clearDecorationsByPlugin(path, plugin, typeOfDecoration, this.registeredDecorations[typeOfDecoration][filePath] || [], this.currentDecorations[typeOfDecoration][filePath] || [])
-    this.currentDecorations[typeOfDecoration][filePath] = currentDecorations
-    this.registeredDecorations[typeOfDecoration][filePath] = registeredDecorations
-  }
-
-  keepDecorationsFor (plugin, typeOfDecoration) {
-    if (!this.currentFile) return
-    const { currentDecorations } = this.api.keepDecorationsFor(this.currentFile, plugin, typeOfDecoration, this.registeredDecorations[typeOfDecoration][this.currentFile] || [], this.currentDecorations[typeOfDecoration][this.currentFile] || [])
-    this.currentDecorations[typeOfDecoration][this.currentFile] = currentDecorations
-  }
-
-  /**
-   * Clears all the decorations and for all the sessions for the given @arg plugin
-   * An annotation has the following shape:
-      column: -1
-      row: -1
-      text: "browser/Untitled1.sol: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.↵"
-      type: "warning"
-   * @param {String} filePath
-   */
-  clearAllDecorationsFor (plugin) {
-    for (const session in this.sessions) {
-      this.clearDecorationsByPlugin(session, plugin, 'sourceAnnotationsPerFile')
-      this.clearDecorationsByPlugin(session, plugin, 'markerPerFile')
-    }
-  }
-
-  // error markers
-  async addErrorMarker (error){
-    const { from } = this.currentRequest
-    this.api.addErrorMarker(error, from)
-  }
-
-  async clearErrorMarkers(sources){
-    const { from } = this.currentRequest
-    this.api.clearErrorMarkers(sources, from)
-  }
-
-  /**
-   * Clears all the annotations for the given @arg filePath, the plugin name is retrieved from the context, if none is given, the current session is used.
-   * An annotation has the following shape:
-      column: -1
-      row: -1
-      text: "browser/Untitled1.sol: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.↵"
-      type: "warning"
-   * @param {String} filePath
-   * @param {String} plugin
-   */
-  clearAnnotations (filePath) {
-    filePath = filePath || this.currentFile
-    const { from } = this.currentRequest
-    this.clearDecorationsByPlugin(filePath, from, 'sourceAnnotationsPerFile')
-  }
 
   async addDecoration (decoration, filePath, typeOfDecoration) {
     if (!filePath) return
@@ -536,20 +469,7 @@ class Editor extends Plugin {
     this.currentDecorations[typeOfDecoration][filePath].push(...currentDecorations)
   }
 
-  /**
-   * Add an annotation to the current session.
-   * An annotation has the following shape:
-      column: -1
-      row: -1
-      text: "browser/Untitled1.sol: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.↵"
-      type: "warning"
-   * @param {Object} annotation
-   * @param {String} filePath
-   */
-  async addAnnotation (annotation, filePath) {
-    filePath = filePath || this.currentFile
-    await this.addDecoration(annotation, filePath, 'sourceAnnotationsPerFile')
-  }
+
 
   async highlight (position, filePath, highlightColor, opt = { focus: true }) {
     filePath = filePath || this.currentFile

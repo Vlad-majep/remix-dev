@@ -296,14 +296,7 @@ export const CompilerApiMixin = (Base) => class extends Base {
         // forwarding the event to the appManager infra
         this.emit('compilationFinished', source.target, source, 'soljson', data, input, version)
         const hideWarnings = await this.getAppParameter('hideWarnings')
-        if (data.errors && data.errors.length > 0 && !hideWarnings) {
-          const warningsCount = data.errors.length
-          this.statusChanged({
-            key: warningsCount,
-            title: `Compilation successful with ${warningsCount} warning${warningsCount > 1 ? 's' : ''}`,
-            type: 'warning'
-          })
-        } else this.statusChanged({ key: 'succeed', title: 'Compilation successful', type: 'success' })
+        this.statusChanged({ key: 'succeed', title: 'Compilation successful', type: 'success' })
       } else {
         const count = (data.errors ? data.errors.filter(error => error.severity === 'error').length : 0 + (data.error ? 1 : 0))
         this.statusChanged({ key: count, title: `Compilation failed with ${count} error${count > 1 ? 's' : ''}`, type: 'error' })

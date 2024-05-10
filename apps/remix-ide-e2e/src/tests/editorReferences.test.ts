@@ -16,7 +16,7 @@ const openReferences = (browser: NightwatchBrowser, path: string) => {
 
 module.exports = {
   'before': function (browser: NightwatchBrowser, done: VoidFunction) {
-    init(browser, done, 'http://127.0.0.1:8080', false)
+    init(browser, done, 'http://127.0.0.1:3000', false)
   },
 
   'Should load the test file': function (browser: NightwatchBrowser) {

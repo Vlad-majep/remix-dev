@@ -169,7 +169,7 @@ class AppComponent {
 
     this.platform = isElectron() ? 'desktop' : 'web'
 
-    const hosts = ['127.0.0.1:8080', '192.168.0.101:8080', 'localhost:8080']
+    const hosts = ['127.0.0.1:3000', '192.168.0.101:3000', 'localhost:3000']
     // workaround for Electron support
     if (!isElectron() && !hosts.includes(window.location.host)) {
       // Oops! Accidentally trigger refresh or bookmark.

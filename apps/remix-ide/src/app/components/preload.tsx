@@ -21,13 +21,13 @@ export const Preload = (props: any) => {
   const localStorageFileSystem = useRef<fileSystem>(new localStorageFS())
   // url parameters to e2e test the fallbacks and error warnings
   const testmigrationFallback = useRef<boolean>(
-    window.location.hash.includes('e2e_testmigration_fallback=true') && window.location.host === '127.0.0.1:8080' && window.location.protocol === 'http:'
+    window.location.hash.includes('e2e_testmigration_fallback=true') && window.location.host === '127.0.0.1:3000' && window.location.protocol === 'http:'
   )
   const testmigrationResult = useRef<boolean>(
-    window.location.hash.includes('e2e_testmigration=true') && window.location.host === '127.0.0.1:8080' && window.location.protocol === 'http:'
+    window.location.hash.includes('e2e_testmigration=true') && window.location.host === '127.0.0.1:3000' && window.location.protocol === 'http:'
   )
   const testBlockStorage = useRef<boolean>(
-    window.location.hash.includes('e2e_testblock_storage=true') && window.location.host === '127.0.0.1:8080' && window.location.protocol === 'http:'
+    window.location.hash.includes('e2e_testblock_storage=true') && window.location.host === '127.0.0.1:3000' && window.location.protocol === 'http:'
   )
 
   function loadAppComponent() {

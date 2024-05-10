@@ -60,16 +60,16 @@
         "development": {
           "buildTarget": "remix-ide:build:development",
           "host": "0.0.0.0",
-          "port": 8080
+          "port": 3000
         },
         "hot":{
           "buildTarget": "remix-ide:build:development",
-          "port": 8080,
+          "port": 3000,
           "hmr": true
         },
         "production": {
           "buildTarget": "remix-ide:build:production",
-          "port": 8080
+          "port": 3000
         }
       }
     },

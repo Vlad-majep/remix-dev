@@ -158,7 +158,7 @@ const assertPluginIsActive = function (browser: NightwatchBrowser, id: string, s
 module.exports = {
   '@disabled': true,
   before: function (browser: NightwatchBrowser, done: VoidFunction) {
-    init(browser, done) // , 'http://localhost:8080', false)
+    init(browser, done) // , 'http://localhost:3000', false)
   },
 
   afterEach: function (browser: NightwatchBrowser) {

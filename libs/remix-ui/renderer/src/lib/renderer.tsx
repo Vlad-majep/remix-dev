@@ -47,29 +47,11 @@ export const Renderer = ({ message, opt = {}, plugin }: RendererProps) => {
     setClassList(opt.type === 'error' ? 'alert alert-danger' : 'alert alert-warning')
   }, [message, opt])
 
-  const handleErrorClick = (opt) => {
-    if (opt.click) {
-      opt.click(message)
-    } else if (opt.errFile !== undefined && opt.errLine !== undefined && opt.errCol !== undefined) {
-      _errorClick(opt.errFile, opt.errLine, opt.errCol)
-    }
-  }
 
   const handleClose = () => {
     setClose(true)
   }
 
-  const _errorClick = async (errFile, errLine, errCol) => {
-    if (errFile !== (await plugin.call('config', 'getAppParameter', 'currentFile'))) {
-      // TODO: refactor with this._components.contextView.jumpTo
-      if (await plugin.call('fileManager', 'exists', errFile)) {
-        await plugin.call('fileManager', 'open', errFile)
-        await plugin.call('editor', 'gotoLine', errLine, errCol)
-      }
-    } else {
-      await plugin.call('editor', 'gotoLine', errLine, errCol)
-    }
-  }
 
   const askGtp = async () => {
     try {
@@ -86,35 +68,8 @@ export const Renderer = ({ message, opt = {}, plugin }: RendererProps) => {
   return (
     <>
       {messageText && !close && (
-        <div className={`remixui_sol ${editorOptions.type} ${classList}`} data-id={editorOptions.errFile} onClick={() => handleErrorClick(editorOptions)}>
-          {editorOptions.useSpan ? (
-            <span> {messageText} </span>
-          ) : (
-            <pre>
-              <span>{messageText}</span>
-            </pre>
-          )}
-          <div className="close" data-id="renderer" onClick={handleClose}>
-            <i className="fas fa-times"></i>
-          </div>
-          <div className="d-flex pt-1 flex-row-reverse">
-            <span className="ml-3 pt-1 py-1" >
-              <CopyToClipboard content={messageText} className={` p-0 m-0 far fa-copy ${classList}`} direction={'top'} />
-            </span>
-            <span
-              className="position-relative text-ai text-sm pl-0 pr-2"
-              style={{ fontSize: "x-small", alignSelf: "end" }}
-            >
-            </span>
-            <span
-              className="button border text-ai btn-sm"
-              onClick={() => { askGtp() }}
-              style={{ borderColor: "var(--ai)" }}
-            >
-              ASK GPT
-            </span>
+        <div >
 
-          </div>
         </div>
       )}
     </>

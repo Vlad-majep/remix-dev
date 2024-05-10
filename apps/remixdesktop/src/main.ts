@@ -36,7 +36,7 @@ export const createWindow = async (dir?: string): Promise<void> => {
   // and load the index.html of the app.
   mainWindow.loadURL(
     process.env.NODE_ENV === 'production' || isPackaged ? `file://${__dirname}/remix-ide/index.html` + params :
-      'http://localhost:8080' + params)
+      'http://localhost:3000' + params)
 
   mainWindow.maximize();
 

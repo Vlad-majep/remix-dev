@@ -15,7 +15,7 @@ const checkEditorHoverContent = (browser: NightwatchBrowser, path: string, expec
 module.exports = {
     '@disabled': true,
     before: function (browser: NightwatchBrowser, done: VoidFunction) {
-        init(browser, done, 'http://127.0.0.1:8080', false, null, true)
+        init(browser, done, 'http://127.0.0.1:3000', false, null, true)
     },
     'Should load the test file #group1': function (browser: NightwatchBrowser) {
         browser.openFile('contracts')

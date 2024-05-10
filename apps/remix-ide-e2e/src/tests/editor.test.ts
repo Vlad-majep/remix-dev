@@ -6,7 +6,7 @@ import init from '../helpers/init'
 module.exports = {
   '@disabled': true,
   'before': function (browser: NightwatchBrowser, done: VoidFunction) {
-    init(browser, done, 'http://127.0.0.1:8080', true)
+    init(browser, done, 'http://127.0.0.1:3000', true)
   },
 
   'Should zoom in editor #group1': function (browser: NightwatchBrowser) {
